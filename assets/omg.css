@@ -1,0 +1,16 @@
+.panel-footer {
+    min-height: 60px;
+}
+.dataset {
+    margin: 12px 0px;
+}
+.dataset:hover {
+    background: #dff0d8;
+}
+.dataset_title {
+    cursor: pointer;
+}
+#editor {
+    height: 300px;
+}
+

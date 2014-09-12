@@ -1,0 +1,122 @@
+<html>
+  <head>
+
+    <script type="text/x-template" id="package_list_tpl">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          Available Datasets
+        </div>
+        <div class="panel-body">
+
+          <ul class="list-unstyled">
+            <% _.each(packages, function(dataset){ if(!dataset.private){ %>
+            <li class="dataset">
+              <span class="dataset_title">
+                <%=dataset.title%> (<%= dataset.num_resources %>)
+              </span>
+              <div class="hidden">
+                <p>Resources:</p>
+                <ul>
+
+                  <% _.each(dataset.resources, function(resource){ if(resource.format == 'CSV'){ %>
+                  <li class="resource">
+                    <button class="btn btn-default insert_resource" 
+                            data-resource-id="<%= resource.id %>" 
+                            data-dataset-id="<%= dataset.id %>">
+                      <i class="fa fa-paste"></i>
+                    </button>
+                    <%= resource.name %>
+                  </li>
+                  <% } }); %>
+                </ul>
+              </div>
+            </li>
+            <% }}); %>
+          </ul>
+        </div>
+      </div>
+    </script>
+    
+    <link rel="stylesheet" href="assets/css/lib/bootstrap-3.2.0-dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="assets/js/lib/recline/dist/recline.css" />
+    <link rel="stylesheet" href="assets/js/lib/slickgrid/2.0.1/slick.grid.css">
+    <link rel="stylesheet" href="assets/omg.css">
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+
+    
+    <script type="text/javascript" src="assets/js/lib/jquery/1.7.1/jquery.js"></script>
+    <script type="text/javascript" src="assets/js/lib/underscore/1.4.4/underscore.js"></script>
+    <script type="text/javascript" src="assets/js/lib/backbone/1.0.0/backbone.js"></script>
+    <script type="text/javascript" src="assets/js/lib/mustache/0.5.0-dev/mustache.js"></script>
+    <script type="text/javascript" src="assets/js/lib/bootstrap/2.3.2/bootstrap.js"></script>
+    <script type="text/javascript" src="assets/js/lib/slickgrid/2.0.1/jquery.event.drag-2.2.js"></script>
+    <script type="text/javascript" src="assets/js/lib/slickgrid/2.0.1/slick.core.js"></script>
+    <script type="text/javascript" src="assets/js/lib/slickgrid/2.0.1/slick.grid.js"></script>
+
+    <script type="text/javascript" src="assets/js/lib/slickgrid/2.0.1/jquery-ui-1.8.16.custom.min.js"></script>
+    <script type="text/javascript" src="assets/js/lib/slickgrid/2.0.1/jquery.event.drag-2.0.min.js"></script>
+    <script type="text/javascript" src="assets/js/lib/slickgrid/2.0.1/slick.grid.min.js"></script>
+    <script type="text/javascript" src="assets/js/lib/slickgrid/2.0.1/plugins/slick.rowselectionmodel.js"></script>
+    <script type="text/javascript" src="assets/js/lib/slickgrid/2.0.1/plugins/slick.rowmovemanager.js"></script>
+
+    <script type="text/javascript" src="assets/js/lib/moment/2.0.0/moment.js"></script>
+
+    <script type="text/javascript" src="assets/js/lib/flot/jquery.flot.js"></script>
+    <script type="text/javascript" src="assets/js/lib/flot/jquery.flot.time.js"></script>
+    
+    <script type="text/javascript" src="assets/js/lib/recline/dist/recline.js"></script>
+    <script type="text/javascript" src="assets/js/lib/ckan.js/ckan.js"></script>
+    <script src="assets/js/lib/ace/ace.js" type="text/javascript" charset="utf-8"></script>
+    <script src="assets/js/lib/ace/ext-language_tools.js" type="text/javascript" charset="utf-8"></script>
+    
+    <script type="text/javascript" src="assets/omg.js"></script>
+    
+    <script>      
+      $(document).ready(function(){
+      OMG.initialize();
+      });
+    </script>
+    
+  </head>
+  <body>
+    <nav class="navbar navbar-default" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">OMG DATAS!</a>
+        </div>
+    </nav>    
+    <div class="container">
+      
+      <div class="row"> <!-- Code Editor -->
+        <div class="col-md-8">
+          <div class="panel panel-default" id="querybuilder">
+            <div class="panel-body">
+              <div id="editor">
+              </div>
+            </div>
+            <div class="panel-footer">
+              <a class="btn btn-success pull-right execute">Execute</a>
+            </div>
+          </div>
+
+        </div>
+        <div class="col-md-4 package_list">
+        </div>
+      </div>
+      
+      <div class="row">
+        <div class="col-md-12" id="tabular_results">
+          <div class="grid">
+          </div>
+        </div>
+      </div>
+      
+    </div>
+
+    <!-- <div id="mygrid" style="height: 400px"></div> -->
+
+    <!-- <div id="mygraph"></div> -->
+
+    
+  </body>
+</html>
